@@ -29,6 +29,8 @@ My homelab serves as both a learning platform and a playground where I:
 
 </details>
 
+### What I'm currently running
+
 | Name              | Type |
 | ----------------- | ---- |
 | Home Assistant OS | VM   |
