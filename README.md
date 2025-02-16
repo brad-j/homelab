@@ -29,15 +29,19 @@ My homelab serves as both a learning platform and a playground where I:
 
 </details>
 
-| Name              | Type | Description                            |
-| ----------------- | ---- | -------------------------------------- |
-| Home Assistant OS | VM   | Smart Home Automation                  |
-| Docker Host       | VM   | Containerized Applications (Portainer) |
-| Pi-Hole           | CT   | Network-wide ad blocking & DNS         |
-| SABnzbd           | CT   | Media                                  |
-| Prowlarr          | CT   | Media                                  |
-| Radarr            | CT   | Media                                  |
-| Sonarr            | CT   | Media                                  |
-| Gluetun           | CT   | Media                                  |
-| Jellyfin          | CT   | Media                                  |
-| Jellyseer         | CT   | Media                                  |
+| Name              | Type |
+| ----------------- | ---- |
+| Home Assistant OS | VM   |
+| Docker Host       | VM   |
+| Pi-Hole           | CT   |
+| SABnzbd           | CT   |
+| Prowlarr          | CT   |
+| Radarr            | CT   |
+| Sonarr            | CT   |
+| Gluetun           | CT   |
+| Jellyfin          | CT   |
+| Jellyseer         | CT   |
+| Uptime Kuma       | CT   |
+| Traefik           | CT   |
+| Vaultwarden       | CT   |
+| Gitea             | CT   |
