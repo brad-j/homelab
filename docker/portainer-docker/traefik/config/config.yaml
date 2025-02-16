@@ -1,0 +1,37 @@
+http:
+  middlewares:
+    default-security-headers:
+      headers:
+        browserXssFilter: true
+        contentTypeNosniff: true
+        forceSTSHeader: true
+        frameDeny: false
+        referrerPolicy: "strict-origin-when-cross-origin"
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 3153600
+        contentSecurityPolicy: "default-src 'self'"
+        customRequestHeaders:
+          X-Forwarded-Proto: https
+    https-redirectscheme:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+  routers:
+    portainer:
+      entryPoints:
+        - "https"
+      rule: "Host(`portainer.half.black`)"
+      middlewares:
+        - default-security-headers
+        - https-redirectscheme
+      tls: {}
+      service: portainer
+
+  services:
+    portainer:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.4.116:9443"
+        passHostHeader: true

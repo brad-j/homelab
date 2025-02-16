@@ -1,0 +1,52 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1026
+      - PGID=100
+      - TZ=America/New_York
+    volumes:
+      - /home/brad/docker/jellyfin:/config
+      - /mnt/data:/data
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.entrypoints=http"
+      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.half.black`)"
+      - "traefik.http.middlewares.jellyfin-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.jellyfin.middlewares=jellyfin-https-redirect"
+      - "traefik.http.routers.jellyfin-secure.entrypoints=https"
+      - "traefik.http.routers.jellyfin-secure.rule=Host(`jellyfin.half.black`)"
+      - "traefik.http.routers.jellyfin-secure.tls=true"
+      - "traefik.http.services.jellyfin-websecure.loadbalancer.server.port=8096"
+      - "traefik.docker.network=proxy"
+    restart: unless-stopped
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=America/New_York
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyseer.entrypoints=http"
+      - "traefik.http.routers.jellyseer.rule=Host(`jellyseer.half.black`)"
+      - "traefik.http.middlewares.jellyseer-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.jellyseer.middlewares=jellyseer-https-redirect"
+      - "traefik.http.routers.jellyseer-secure.entrypoints=https"
+      - "traefik.http.routers.jellyseer-secure.rule=Host(`jellyseer.half.black`)"
+      - "traefik.http.routers.jellyseer-secure.tls=true"
+      - "traefik.http.services.jellyseer-websecure.loadbalancer.server.port=5055"
+      - "traefik.docker.network=proxy"
+    restart: unless-stopped
+    volumes:
+      - /home/brad/docker/jellyseer:/app/config
+
+networks:
+  proxy:
+    external: true
