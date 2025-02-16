@@ -7,7 +7,7 @@ services:
       - PGID=100
       - TZ=America/New_York
     volumes:
-      - /home/brad/docker/jellyfin:/config
+      - /home/brad/docker/media/jellyfin:/config
       - /mnt/data:/data
     networks:
       - proxy
@@ -45,7 +45,7 @@ services:
       - "traefik.docker.network=proxy"
     restart: unless-stopped
     volumes:
-      - /home/brad/docker/jellyseer:/app/config
+      - /home/brad/docker/media/jellyseer:/app/config
 
 networks:
   proxy:

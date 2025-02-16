@@ -8,16 +8,29 @@ services:
       - /dev/net/tun:/dev/net/tun
     ports:
       - 9696:9696
+    networks:
+      - proxy 
     volumes:
-      - /home/brad/docker/gluetun:/gluetun
+      - /home/brad/docker/servarr/gluetun:/gluetun
     environment:
       - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=wireguard
-      - WIREGUARD_PRIVATE_KEY=WIREGUARD_PRIVATE_KEY
-      - WIREGUARD_PRESHARED_KEY=WIREGUARD_PRESHARED_KEY
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
       - WIREGUARD_ADDRESSES=10.178.230.39/32
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prowlarr.entrypoints=http"
+      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.half.black`)"
+      - "traefik.http.middlewares.prowlarr-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.prowlarr.middlewares=prowlarr-https-redirect"
+      - "traefik.http.routers.prowlarr-secure.entrypoints=https"
+      - "traefik.http.routers.prowlarr-secure.rule=Host(`prowlarr.half.black`)"
+      - "traefik.http.routers.prowlarr-secure.tls=true"
+      - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
+      - "traefik.docker.network=proxy"
     restart: unless-stopped
-  
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -27,7 +40,7 @@ services:
       - TZ=America/New_York
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /home/brad/docker/prowlarr:/config
+      - /home/brad/docker/servarr/prowlarr:/config
     restart: unless-stopped
     network_mode: service:gluetun
 
@@ -39,12 +52,22 @@ services:
       - PGID=100
       - TZ=America/New_York
     volumes:
-      - /home/brad/docker/sabnzbd/config:/config
+      - /home/brad/docker/servarr/sabnzbd/config:/config
       - /mnt/data:/data
       - /usenet:/usenet
-    
-    ports:
-      - 8080:8080
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sabnzbd.entrypoints=http"
+      - "traefik.http.routers.sabnzbd.rule=Host(`sabnzbd.half.black`)"
+      - "traefik.http.middlewares.sabnzbd-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.sabnzbd.middlewares=sabnzbd-https-redirect"
+      - "traefik.http.routers.sabnzbd-secure.entrypoints=https"
+      - "traefik.http.routers.sabnzbd-secure.rule=Host(`sabnzbd.half.black`)"
+      - "traefik.http.routers.sabnzbd-secure.tls=true"
+      - "traefik.http.services.sabnzbd.loadbalancer.server.port=8080"
+      - "traefik.docker.network=proxy"
     restart: unless-stopped
 
   sonarr:
@@ -56,11 +79,22 @@ services:
       - TZ=America/New_York
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /home/brad/docker/sonarr:/config
+      - /home/brad/docker/servarr/sonarr:/config
       - /mnt/data:/data
       - /usenet:/usenet
-    ports:
-      - 8989:8989
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.entrypoints=http"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.half.black`)"
+      - "traefik.http.middlewares.sonarr-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.sonarr.middlewares=sonarr-https-redirect"
+      - "traefik.http.routers.sonarr-secure.entrypoints=https"
+      - "traefik.http.routers.sonarr-secure.rule=Host(`sonarr.half.black`)"
+      - "traefik.http.routers.sonarr-secure.tls=true"
+      - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+      - "traefik.docker.network=proxy"
     restart: unless-stopped
 
   radarr:
@@ -72,9 +106,24 @@ services:
       - TZ=America/New_York
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /home/brad/docker/radarr:/config
+      - /home/brad/docker/servarr/radarr:/config
       - /mnt/data:/data
       - /usenet:/usenet
-    ports:
-      - 7878:7878
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.entrypoints=http"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.half.black`)"
+      - "traefik.http.middlewares.radarr-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.radarr.middlewares=radarr-https-redirect"
+      - "traefik.http.routers.radarr-secure.entrypoints=https"
+      - "traefik.http.routers.radarr-secure.rule=Host(`radarr.half.black`)"
+      - "traefik.http.routers.radarr-secure.tls=true"
+      - "traefik.http.services.radarr.loadbalancer.server.port=7878"
+      - "traefik.docker.network=proxy"
     restart: unless-stopped
+
+networks:
+  proxy:
+    external: true

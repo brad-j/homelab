@@ -3,7 +3,7 @@ services:
     image: louislam/uptime-kuma:1
     container_name: uptime-kuma
     volumes:
-        - /home/brad/uptime-kuma:/app/data
+        - /home/brad/docker/uptime-kuma:/app/data
     ports:
         - "3001:3001"
     networks:
