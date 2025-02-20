@@ -20,12 +20,11 @@ My homelab serves as both a learning platform and a playground where I:
 <details>
   <summary>Hardware Specifications</summary>
 
-| Component     | Specification                       |
-| ------------- | ----------------------------------- |
-| CPU           | Intel i9-9900K (8C/16T)             |
-| Memory        | 64GB RAM                            |
-| Storage       | 2× 1TB NVMe SSDs<br>1× 1TB SATA SSD |
-| Total Storage | 3TB                                 |
+| Component | Specification                       |
+| --------- | ----------------------------------- |
+| CPU       | Intel i9-9900K (8C/16T)             |
+| Memory    | 64GB RAM                            |
+| Storage   | 2× 1TB NVMe SSDs<br>1× 2TB SATA SSD |
 
 </details>
 
