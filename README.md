@@ -28,7 +28,7 @@ My homelab serves as both a learning platform and a playground where I:
 
 </details>
 
-### 🖥️ Synology D7123+
+### 🖥️ Synology D723+
 
 <details>
   <summary>Specs.</summary>
@@ -43,19 +43,19 @@ My homelab serves as both a learning platform and a playground where I:
 
 ### What I'm currently running
 
-| Name              | Type |
-| ----------------- | ---- |
-| Home Assistant OS | VM   |
-| Docker Host       | VM   |
-| Pi-Hole           | CT   |
-| SABnzbd           | CT   |
-| Prowlarr          | CT   |
-| Radarr            | CT   |
-| Sonarr            | CT   |
-| Gluetun           | CT   |
-| Jellyfin          | CT   |
-| Jellyseer         | CT   |
-| Uptime Kuma       | CT   |
-| Traefik           | CT   |
-| Vaultwarden       | CT   |
-| Gitea             | CT   |
+| Name                    | Type |
+| ----------------------- | ---- |
+| Home Assistant OS       | VM   |
+| Docker Host (Portainer) | VM   |
+| Pi-Hole                 | CT   |
+| SABnzbd                 | CT   |
+| Prowlarr                | CT   |
+| Radarr                  | CT   |
+| Sonarr                  | CT   |
+| Gluetun                 | CT   |
+| Jellyfin                | CT   |
+| Jellyseer               | CT   |
+| Uptime Kuma             | CT   |
+| Traefik                 | CT   |
+| Vaultwarden             | CT   |
+| Gitea                   | CT   |
