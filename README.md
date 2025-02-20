@@ -18,13 +18,26 @@ My homelab serves as both a learning platform and a playground where I:
 ### 🖥️ Proxmox Host
 
 <details>
-  <summary>Hardware Specifications</summary>
+  <summary>Specs.</summary>
 
 | Component | Specification                       |
 | --------- | ----------------------------------- |
-| CPU       | Intel i9-9900K (8C/16T)             |
+| CPU       | Intel i9-9900K                      |
 | Memory    | 64GB RAM                            |
 | Storage   | 2× 1TB NVMe SSDs<br>1× 2TB SATA SSD |
+
+</details>
+
+### 🖥️ Synology D7123+
+
+<details>
+  <summary>Specs.</summary>
+
+| Component | Specification   |
+| --------- | --------------- |
+| CPU       | AMD Ryzen R1600 |
+| Memory    | 32GB RAM        |
+| Storage   | 2x 8TB SHA-1    |
 
 </details>
 
