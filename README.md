@@ -1,4 +1,4 @@
-# 🏠 Homelab [![Project Status: Active](https://img.shields.io/badge/Project%20Status-Active-green.svg)](https://github.com/yourusername/homelab)
+# 🏠 Homelab
 
 This repository contains all the code, configuration, and documentation for my personal homelab setup. This project began when I repurposed my old gaming PC, transforming it into a home server with Proxmox.
 
