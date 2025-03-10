@@ -36,7 +36,7 @@ read BRIDGE
 
 printf "\n"
 
-printf "If all of the choices look correct, press enter/return to create the VM. (CTRL + C to start over) \n" confirmation
+printf "OPTIONS: \n"
 
 name=${TEMPLATE_NAME:=template_name_no_extension}
 vmid=${VMID:="5001"}
@@ -46,10 +46,22 @@ bridge=${BRIDGE:="vmbr0"}
 
 printf "%s\n" "Template Name: ${name}" "VM id: ${vmid}" "Memory: ${memory}" "CPU Cores: ${cores}" "Network Bridge: ${bridge}"
 
-qm create $vmid --name "$name" --ostype l26 \
-    --memory "$memory" \
-    --agent 1 \
-    --bios ovmf --machine q35 --efidisk0 local-zfs:0,pre-enrolled-keys=0 \
-    --cpu host --socket 1 --cores "$cores" \
-    --vga serial0 --serial0 socket  \
-    --net0 virtio,bridge="$bridge"
+printf "\n"
+
+read -e -p "Are all of the optins correct? (Y/n)" confirmation
+confirmation=${confirmation:-Y}
+
+if [[ "$confirmation" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  echo "Confirmed. Proceeding..."
+  qm create $vmid --name "$name" --ostype l26 \
+      --memory "$memory" \
+      --agent 1 \
+      --bios ovmf --machine q35 --efidisk0 local-zfs:0,pre-enrolled-keys=0 \
+      --cpu host --socket 1 --cores "$cores" \
+      --vga serial0 --serial0 socket  \
+      --net0 virtio,bridge="$bridge"
+elif [[ "$confirmation" =~ ^([nN][oO]|[nN])$ ]]; then
+  echo "VM creation cancelled."
+else
+  echo "Invalid input. Please enter y/yes or n/no."
+fi
